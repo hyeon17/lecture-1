@@ -15,25 +15,12 @@ function getParametersForUnsplash({width, height, quality, format}) {
 /*
  * 파라미터로 넘어온 문자열에서 일부 특수문자를 제거하는 함수
  * (Markdown으로 된 문자열의 특수문자를 제거하기 위함)
+ * 한 번의 순회 + Set 조회(O(1))로 O(n) 처리
  * */
+const SPECIAL_CHARS_REGEX = /[-#_*~&;![]`>\n=]/g
+
 function removeSpecialCharacter(str) {
-  const removeCharacters = ['#', '_', '*', '~', '&', ';', '!', '[', ']', '`', '>', '\n', '=', '-']
-  let _str = str
-  let i = 0,
-    j = 0
-
-  for (i = 0; i < removeCharacters.length; i++) {
-    j = 0
-    while (j < _str.length) {
-      if (_str[j] === removeCharacters[i]) {
-        _str = _str.substring(0, j).concat(_str.substring(j + 1))
-        continue
-      }
-      j++
-    }
-  }
-
-  return _str
+  return str.replace(SPECIAL_CHARS_REGEX, '')
 }
 
 function Article(props) {
