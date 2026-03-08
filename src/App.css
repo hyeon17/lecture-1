@@ -1,3 +1,8 @@
 .App {
   text-align: center;
 }
+
+.App__loading {
+  padding: 2rem;
+  color: #666;
+}
